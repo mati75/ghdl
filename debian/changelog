@@ -1,18 +1,13 @@
-ghdl (0.30~svn20130213-2) unstable; urgency=low
+ghdl (0.30~svn20130213-3) unstable; urgency=low
 
-  * Non-maintainer version.
-  * Proper fix for internal compiler error instead of just hiding it.
-
- -- Joris van Rantwijk <jorisvr@sron.nl>  Fri, 15 Feb 2013 15:30:00 +0100
-
-ghdl (0.30~svn20130213-1) unstable; urgency=low
-
-  * Non-maintainer version.
-  * Fix building of ghdl for Debian wheezy. (Closes: #695303)
+  * New maintainer. (Closes: #696548)
+  * Fix building of ghdl for Debian wheezy/jessie. (Closes: #695303)
   * Upgrade to GHDL upstream SVN snapshot of 2013-02-13.
-  * Upgrade to gcc-4.7.2. (Closes: #392952)
+  * Upgrade to gcc-4.7. (Closes: #392952)
+  * Workaround for broken patch in gcc-4.7-source.
+  * Disable libquadmath to avoid lintian errors for libquadmath.la
 
- -- Joris van Rantwijk <jorisvr@sron.nl>  Fri, 15 Feb 2013 11:05:00 +0100
+ -- Joris van Rantwijk <joris@jorisvr.nl>  Sun, 27 Oct 2013 18:31:25 +0100
 
 ghdl (0.29+gcc4.3.4+dfsg-1.1) unstable; urgency=low
 

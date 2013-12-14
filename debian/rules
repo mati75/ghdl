@@ -26,6 +26,7 @@ GCC_CONFIGURE_OPTS = \
   --disable-shared \
   --disable-libmudflap \
   --enable-targets=all \
+  --disable-libquadmath \
   --disable-libssp \
   --disable-libgomp
 
@@ -43,10 +44,13 @@ DESTDIR=$(CURDIR)/debian/ghdl
 setup: setup-stamp
 setup-stamp: ghdl-$(GHDL_VERSION).tar.bz2
 	dh_testdir
-	# extract GCC source and apply Debian patches	
+	# extract GCC source
 	mkdir -p gcc
 	ln -sf $(GCC_SOURCE_DIR)/gcc*.tar* gcc
 	cp -a $(GCC_SOURCE_DIR)/debian gcc
+	# remove broken GCC patch
+	for f in gcc/debian/patches/gcc-as-needed.diff* ; do awk '/^Index: / { skip = 0; } /^Index: .*aarch64-linux.h/ { skip = 1; } // { if (!skip) print; }' < $$f > $${f}new ; mv $${f}new $$f ; done
+	# apply Debian patches to GCC
 	$(MAKE) -C gcc -f debian/rules patch
 	# extract GHDL source
 	( cd gcc/src/gcc && tar xjf ../../../ghdl-$(GHDL_VERSION).tar.bz2 --strip-components 1 ghdl-$(GHDL_VERSION)/vhdl )
@@ -77,7 +81,9 @@ configure-stamp: patch-stamp
 	(cd gcc/build && CC="$(CC)" CFLAGS="$(CFLAGS)" CPPFLAGS="" LDFLAGS="" FFLAGS="" CXXFLAGS="" ../src/configure $(GCC_CONFIGURE_OPTS))
 	touch configure-stamp
 
-build: build-stamp
+build: build-arch build-indep
+build-arch: build-stamp
+build-indep: build-stamp
 build-stamp: configure-stamp
 	dh_testdir
 	CC="$(CC)" CFLAGS="$(CFLAGS)" CPPFLAGS="" LDFLAGS="" FFLAGS="" CXXFLAGS="" $(MAKE) -C gcc/build
