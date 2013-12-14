@@ -1,8 +1,10 @@
-Index: ghdl-0.30~svn20130213/gcc/src/gcc/vhdl/Make-lang.in
+Add required make target "vhdl.install-plugin".
+
+Index: ghdl-0.30~svn20130213/ghdl/translate/gcc/Make-lang.in
 ===================================================================
---- ghdl-0.30~svn20130213.orig/gcc/src/gcc/vhdl/Make-lang.in	2013-02-14 17:28:13.000000000 +0100
-+++ ghdl-0.30~svn20130213/gcc/src/gcc/vhdl/Make-lang.in	2013-02-14 17:32:37.028534345 +0100
-@@ -232,6 +232,8 @@
+--- ghdl-0.30~svn20130213.orig/ghdl/translate/gcc/Make-lang.in	2012-12-11 03:46:11.000000000 +0100
++++ ghdl-0.30~svn20130213/ghdl/translate/gcc/Make-lang.in	2013-12-08 16:22:44.634533000 +0100
+@@ -179,6 +179,8 @@
  # Install the library
  	$(MAKE_IN_VHDL) install-ghdllib
  

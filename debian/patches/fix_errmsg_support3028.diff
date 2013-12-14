@@ -1,0 +1,34 @@
+Print error message instead of compiler crash on integer literal out of range.
+Patch by Brian Drummond.
+See also https://gna.org/support/?3028
+
+Index: ghdl-0.30~svn20130213/ghdl/translate/translation.adb
+===================================================================
+--- ghdl-0.30~svn20130213.orig/ghdl/translate/translation.adb	2013-12-10 22:17:33.282533000 +0100
++++ ghdl-0.30~svn20130213/ghdl/translate/translation.adb	2013-12-10 22:24:11.234533000 +0100
+@@ -7277,6 +7277,16 @@
+                                Def : Iir;
+                                Mode : Type_Mode_Type) return Boolean
+       is
++
++         function Get_Value_I32 (Lit : Iir) return Iir_Int32 is
++         begin
++            return Iir_Int32(Get_Value(Lit));
++         exception
++            when Constraint_Error =>
++               Error_Msg_Sem ("Value exceeds range of 32-bit Integer" , Lit);
++               return Iir_Int32(0);
++         end Get_Value_I32;
++
+       begin
+          case Mode is
+             when Type_Mode_B2 =>
+@@ -7309,7 +7319,7 @@
+                declare
+                   V : Iir_Int32;
+                begin
+-                  V := Iir_Int32 (Get_Value (Lit));
++                  V := Get_Value_I32 (Lit);
+                   if Is_Hi then
+                      return V = Iir_Int32'Last;
+                   else

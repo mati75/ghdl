@@ -2,7 +2,7 @@ Source: ghdl
 Section: electronics
 Priority: optional
 Maintainer: Joris van Rantwijk <joris@jorisvr.nl>
-Build-Depends: debhelper (>= 7), gnat (>= 4.6), patch, bzip2, texinfo, zlib1g-dev, libgmp-dev (>= 2:5.0), libmpfr-dev (>= 3.1), libmpc-dev (>= 0.8), gcc-4.7-source, lsb-release, autogen, quilt
+Build-Depends: debhelper (>= 7), gnat-4.8, patch, bzip2, texinfo, zlib1g-dev, libgmp-dev (>= 2:5.0), libmpfr-dev (>= 3.1), libmpc-dev (>= 0.8), gcc-4.8-source, lsb-release, autogen, quilt
 Build-Conflicts: ghdl
 Standards-Version: 3.9.4
 

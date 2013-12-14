@@ -1,16 +1,11 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 
-# Directory where we will look for an installed gcc-4.7-source package.
-GCC_SOURCE_DIR = /usr/src/gcc-4.7
+# Directory where we will look for an installed gcc-4.8-source package.
+GCC_SOURCE_DIR = /usr/src/gcc-4.8
 
 # Expect to build a GHDL source distribution named ghdl-$(GHDL_VERSION).
 GHDL_VERSION = 0.30dev
-
-# Compile with gnatgcc to ensure that the C and Ada parts are built with
-# the same version of GCC.
-CC = gnatgcc
-CFLAGS = -O
 
 DEB_BUILD_GNU_TYPE = $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 DEB_HOST_GNU_TYPE  = $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
@@ -32,15 +27,35 @@ GCC_CONFIGURE_OPTS = \
 
 DESTDIR=$(CURDIR)/debian/ghdl
 
-# Compiling GHDL requires the sources of gcc-4.7.  The Debian patches
-# for gcc-4.7 are also required in order to support multiarch.
+# Debian-specific patches must be applied to the upstream GHDL source.
+# These patches are provided in debian/patches.
+patch: patch-stamp
+patch-stamp:
+	dh_testdir
+	QUILT_PATCHES=debian/patches quilt --quiltrc /dev/null push -a
+	touch patch-stamp
+
+# The GHDL upstream snapshot is not yet prepared for compilation.
+# It contains a script ghdl/translate/gcc/dist.sh which is executed
+# here to build a source distribution archive.
+# This must be done AFTER Debian-specific patches have been applied.
+ghdl-$(GHDL_VERSION).tar.bz2: patch-stamp
+	dh_testdir
+	( cd ghdl/translate/gcc && \
+          ./dist.sh sources && \
+          mv ghdl-$(GHDL_VERSION).tar.bz2 ../../.. )
+	# touch the file to get a high resolution timestamp, otherwise it will be rebuilt without need
+	touch ghdl-$(GHDL_VERSION).tar.bz2
+
+# Compiling GHDL requires the sources of gcc-4.8.
 # 
-# The Debian package gcc-4.7-source is used to provide the GCC sources.
+# The Debian package gcc-4.8-source is used to provide the GCC sources.
 # The GCC source tree is extracted into a new subdirectory "gcc" in the
 # unpacked source package.  All Debian patches for GCC are then applied.
 #
 # Finally, the newly created GHDL source distribution is extracted as
 # a subdirectory in the GCC source tree "gcc/src/gcc/vhdl".
+#
 setup: setup-stamp
 setup-stamp: ghdl-$(GHDL_VERSION).tar.bz2
 	dh_testdir
@@ -48,8 +63,6 @@ setup-stamp: ghdl-$(GHDL_VERSION).tar.bz2
 	mkdir -p gcc
 	ln -sf $(GCC_SOURCE_DIR)/gcc*.tar* gcc
 	cp -a $(GCC_SOURCE_DIR)/debian gcc
-	# remove broken GCC patch
-	for f in gcc/debian/patches/gcc-as-needed.diff* ; do awk '/^Index: / { skip = 0; } /^Index: .*aarch64-linux.h/ { skip = 1; } // { if (!skip) print; }' < $$f > $${f}new ; mv $${f}new $$f ; done
 	# apply Debian patches to GCC
 	$(MAKE) -C gcc -f debian/rules patch
 	# extract GHDL source
@@ -57,28 +70,11 @@ setup-stamp: ghdl-$(GHDL_VERSION).tar.bz2
 	rm -rf gcc/build
 	touch setup-stamp
 
-# The GHDL upstream snapshot is not yet prepared for compilation.
-# It contains a script ghdl/translate/gcc/dist.sh which is executed
-# here to build a source distribution archive.
-ghdl-$(GHDL_VERSION).tar.bz2:
-	dh_testdir
-	( cd ghdl/translate/gcc && \
-          ./dist.sh sources && \
-          mv ghdl-$(GHDL_VERSION).tar.bz2 ../../.. )
-
-# Specific patches to GCC and to GHDL are required.
-# These patches are provided in debian/patches.
-patch: patch-stamp
-patch-stamp: setup-stamp
-	dh_testdir
-	QUILT_PATCHES=debian/patches quilt --quiltrc /dev/null push -a
-	touch patch-stamp
-
 configure: configure-stamp
-configure-stamp: patch-stamp
+configure-stamp: setup-stamp
 	dh_testdir
 	mkdir -p gcc/build
-	(cd gcc/build && CC="$(CC)" CFLAGS="$(CFLAGS)" CPPFLAGS="" LDFLAGS="" FFLAGS="" CXXFLAGS="" ../src/configure $(GCC_CONFIGURE_OPTS))
+	(cd gcc/build && ../src/configure $(GCC_CONFIGURE_OPTS))
 	touch configure-stamp
 
 build: build-arch build-indep
@@ -86,7 +82,7 @@ build-arch: build-stamp
 build-indep: build-stamp
 build-stamp: configure-stamp
 	dh_testdir
-	CC="$(CC)" CFLAGS="$(CFLAGS)" CPPFLAGS="" LDFLAGS="" FFLAGS="" CXXFLAGS="" $(MAKE) -C gcc/build
+	$(MAKE) -C gcc/build CFLAGS="-O"
 	touch build-stamp
 
 install: install-stamp
@@ -94,11 +90,12 @@ install-stamp: build-stamp
 	dh_testdir
 	dh_testroot
 	dh_prep
-	CC="$(CC)" CFLAGS="$(CFLAGS)" CPPFLAGS="" LDFLAGS="" FFLAGS="" CXXFLAGS="" $(MAKE) -C gcc/build install DESTDIR=$(DESTDIR)
+	$(MAKE) -C gcc/build install DESTDIR=$(DESTDIR)
 	#install -D debian/ghdl.wrapper $(DESTDIR)/usr/bin/ghdl
 	rm -r $(DESTDIR)/usr/lib/ghdl/include
 	rm -r $(DESTDIR)/usr/lib/ghdl/share/man
 	rm -r $(DESTDIR)/usr/lib/ghdl/share/info
+	find $(DESTDIR)/usr/lib/ghdl -type f -name '*.la' -delete
 	touch install-stamp
 
 clean:

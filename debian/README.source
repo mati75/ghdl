@@ -7,11 +7,17 @@ it can be compiled.
 
 All of these steps are performed automatically by dpkg-buildpackage.
 Alternatively, these steps can be performed by running
-    $ debian/rules patch
+    $ debian/rules setup
 
 Alternatively, the steps can be performed one-by-one as follows:
 
-Step 1: Generate GHDL source archive.
+
+Step 1: Apply Debian patches to GHDL.
+
+    $ debian/rules patch
+
+
+Step 2: Generate GHDL source archive.
 
     The upstream GHDL repository contained in this Debian source package
     is not yet prepared for compilation. It contains a script which must
@@ -21,30 +27,25 @@ Step 1: Generate GHDL source archive.
     $ mv ghdl/translate/gcc/ghdl-<version>.tar.bz2 .
 
 
-Step 2: Copy GCC source.
+Step 3: Copy GCC source.
 
-    GHDL is built as a patch to GCC 4.7. This package therefore depends
-    on gcc-4.7-source to provide GCC source code.
+    GHDL is built as a patch to GCC 4.8. This package therefore depends
+    on gcc-4.8-source to provide GCC source code.
 
     $ mkdir gcc
-    $ ln -sf /usr/src/gcc-4.7/gcc.tar* gcc
-    $ cp -a /usr/src/gcc-4.7/debian gcc
+    $ ln -sf /usr/src/gcc-4.8/gcc.tar* gcc
+    $ cp -a /usr/src/gcc-4.8/debian gcc
 
 
-Step 3: Unpack GCC source code and apply Debian patches.
+Step 4: Unpack GCC source code and apply Debian patches.
 
     $ ( cd gcc ; debian/rules patch )
 
 
-Step 4: Unpack locally generated GHDL source archive.
+Step 5: Unpack locally generated GHDL source archive.
 
     $ tar xjvf ghdl-<version>.tar.bz2
     $ mv ghdl-<version>/vhdl gcc/src/gcc
 
-
-Step 5: Apply Debian patches to GHDL.
-
-    $ touch debian/setup-stamp
-    $ debian/rules patch
-
 --
+
