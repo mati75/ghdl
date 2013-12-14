@@ -1,0 +1,130 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Directory where we will look for an installed gcc-4.7-source package.
+GCC_SOURCE_DIR = /usr/src/gcc-4.7
+
+# Expect to build a GHDL source distribution named ghdl-$(GHDL_VERSION).
+GHDL_VERSION = 0.30dev
+
+# Compile with gnatgcc to ensure that the C and Ada parts are built with
+# the same version of GCC.
+CC = gnatgcc
+CFLAGS = -O
+
+DEB_BUILD_GNU_TYPE = $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+DEB_HOST_GNU_TYPE  = $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+
+# Note: --enable-targets=all is required to avoid problems with multiarch.
+GCC_CONFIGURE_OPTS = \
+  --build=$(DEB_BUILD_GNU_TYPE) \
+  --host=$(DEB_HOST_GNU_TYPE) \
+  --prefix=/usr/lib/ghdl \
+  --with-system-zlib \
+  --enable-languages=vhdl \
+  --enable-bootstrap=no \
+  --disable-shared \
+  --disable-libmudflap \
+  --enable-targets=all \
+  --disable-libssp \
+  --disable-libgomp
+
+DESTDIR=$(CURDIR)/debian/ghdl
+
+# Compiling GHDL requires the sources of gcc-4.7.  The Debian patches
+# for gcc-4.7 are also required in order to support multiarch.
+# 
+# The Debian package gcc-4.7-source is used to provide the GCC sources.
+# The GCC source tree is extracted into a new subdirectory "gcc" in the
+# unpacked source package.  All Debian patches for GCC are then applied.
+#
+# Finally, the newly created GHDL source distribution is extracted as
+# a subdirectory in the GCC source tree "gcc/src/gcc/vhdl".
+setup: setup-stamp
+setup-stamp: ghdl-$(GHDL_VERSION).tar.bz2
+	dh_testdir
+	# extract GCC source and apply Debian patches	
+	mkdir -p gcc
+	ln -sf $(GCC_SOURCE_DIR)/gcc*.tar* gcc
+	cp -a $(GCC_SOURCE_DIR)/debian gcc
+	$(MAKE) -C gcc -f debian/rules patch
+	# extract GHDL source
+	( cd gcc/src/gcc && tar xjf ../../../ghdl-$(GHDL_VERSION).tar.bz2 --strip-components 1 ghdl-$(GHDL_VERSION)/vhdl )
+	rm -rf gcc/build
+	touch setup-stamp
+
+# The GHDL upstream snapshot is not yet prepared for compilation.
+# It contains a script ghdl/translate/gcc/dist.sh which is executed
+# here to build a source distribution archive.
+ghdl-$(GHDL_VERSION).tar.bz2:
+	dh_testdir
+	( cd ghdl/translate/gcc && \
+          ./dist.sh sources && \
+          mv ghdl-$(GHDL_VERSION).tar.bz2 ../../.. )
+
+# Specific patches to GCC and to GHDL are required.
+# These patches are provided in debian/patches.
+patch: patch-stamp
+patch-stamp: setup-stamp
+	dh_testdir
+	QUILT_PATCHES=debian/patches quilt --quiltrc /dev/null push -a
+	touch patch-stamp
+
+configure: configure-stamp
+configure-stamp: patch-stamp
+	dh_testdir
+	mkdir -p gcc/build
+	(cd gcc/build && CC="$(CC)" CFLAGS="$(CFLAGS)" CPPFLAGS="" LDFLAGS="" FFLAGS="" CXXFLAGS="" ../src/configure $(GCC_CONFIGURE_OPTS))
+	touch configure-stamp
+
+build: build-stamp
+build-stamp: configure-stamp
+	dh_testdir
+	CC="$(CC)" CFLAGS="$(CFLAGS)" CPPFLAGS="" LDFLAGS="" FFLAGS="" CXXFLAGS="" $(MAKE) -C gcc/build
+	touch build-stamp
+
+install: install-stamp
+install-stamp: build-stamp
+	dh_testdir
+	dh_testroot
+	dh_prep
+	CC="$(CC)" CFLAGS="$(CFLAGS)" CPPFLAGS="" LDFLAGS="" FFLAGS="" CXXFLAGS="" $(MAKE) -C gcc/build install DESTDIR=$(DESTDIR)
+	#install -D debian/ghdl.wrapper $(DESTDIR)/usr/bin/ghdl
+	rm -r $(DESTDIR)/usr/lib/ghdl/include
+	rm -r $(DESTDIR)/usr/lib/ghdl/share/man
+	rm -r $(DESTDIR)/usr/lib/ghdl/share/info
+	touch install-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -rf gcc/build
+	rm -f gcc/src/gcc/vhdl/libraries/*.v87 gcc/src/gcc/vhdl/libraries/*.v93
+	dh_clean 
+
+# Build architecture-independent files here.
+binary-indep: build install
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs 
+	dh_installdocs
+	dh_installman
+	dh_installinfo
+	dh_lintian
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: setup patch configure build install clean binary-indep binary-arch binary
+

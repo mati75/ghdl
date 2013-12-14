@@ -1,0 +1,13 @@
+Index: ghdl-0.30~svn20130213/gcc/src/gcc/vhdl/Make-lang.in
+===================================================================
+--- ghdl-0.30~svn20130213.orig/gcc/src/gcc/vhdl/Make-lang.in	2013-02-14 17:28:13.000000000 +0100
++++ ghdl-0.30~svn20130213/gcc/src/gcc/vhdl/Make-lang.in	2013-02-14 17:32:37.028534345 +0100
+@@ -232,6 +232,8 @@
+ # Install the library
+ 	$(MAKE_IN_VHDL) install-ghdllib
+ 
++vhdl.install-plugin:
++
+ install-info:: $(DESTDIR)$(infodir)/ghdl.info
+ 
+ vhdl.install-info: doc/ghdl.info

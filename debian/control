@@ -1,0 +1,27 @@
+Source: ghdl
+Section: electronics
+Priority: optional
+Maintainer: Wesley J. Landaker <wjl@icecavern.net>
+Build-Depends: debhelper (>= 7), gnat (>= 4.6), patch, bzip2, texinfo, zlib1g-dev, libgmp-dev (>= 2:5.0), libmpfr-dev (>= 3.1), libmpc-dev (>= 0.8), gcc-4.7-source, lsb-release, autogen
+Build-Conflicts: ghdl
+Standards-Version: 3.8.3
+
+Package: ghdl
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, zlib1g-dev
+Suggests: gtkwave
+Homepage: http://ghdl.free.fr
+Description: VHDL compiler/simulator using GCC technology
+ (Description from the GHDL home page <http://ghdl.free.fr>):
+ .
+ GHDL is a VHDL simulator, using the GCC technology.
+ .
+ VHDL is a language standardized by the IEEE, intended for developing
+ electronic systems.
+ .
+ GHDL implements the VHDL language according to the IEEE 1076-1987 or
+ the IEEE 1076-1993 standard. GHDL compiles VHDL files and creates a
+ binary which simulates (or executes) your design.
+ .
+ GHDL does not do synthesis: it cannot translate your design into a
+ netlist.
