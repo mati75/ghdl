@@ -27,16 +27,18 @@ GCC_CONFIGURE_OPTS = \
 
 DESTDIR=$(CURDIR)/debian/ghdl
 
-# There are no Debian-specific patches at this time.
+# Debian-specific patches must be applied to the upstream GHDL source.
+# These patches are provided in debian/patches.
 patch: patch-stamp
 patch-stamp:
-#	dh_testdir
-#	QUILT_PATCHES=debian/patches quilt --quiltrc /dev/null push -a
+	dh_testdir
+	QUILT_PATCHES=debian/patches quilt --quiltrc /dev/null push -a
 	touch patch-stamp
 
 # The GHDL upstream snapshot is not yet prepared for compilation.
 # It contains a script ghdl/translate/gcc/dist.sh which is executed
 # here to build a source distribution archive.
+# This must be done AFTER Debian-specific patches have been applied.
 ghdl-$(GHDL_VERSION).tar.bz2: patch-stamp
 	dh_testdir
 	( cd ghdl/translate/gcc && \

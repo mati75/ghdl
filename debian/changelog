@@ -4,7 +4,7 @@ ghdl (0.31~sf20131215-1) unstable; urgency=low
   * Upgrade to gcc-4.8-source.
   * Build with gnat-4.8.
 
- -- Joris van Rantwijk <joris@jorisvr.nl>  Sun, 15 Dec 2013 21:18:00 +0100
+ -- Joris van Rantwijk <joris@jorisvr.nl>  Sun, 15 Dec 2013 22:07:00 +0100
 
 ghdl (0.30~svn20130213-3) unstable; urgency=low
 
