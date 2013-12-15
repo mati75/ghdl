@@ -5,7 +5,7 @@
 GCC_SOURCE_DIR = /usr/src/gcc-4.8
 
 # Expect to build a GHDL source distribution named ghdl-$(GHDL_VERSION).
-GHDL_VERSION = 0.30dev
+GHDL_VERSION = 0.31dev
 
 DEB_BUILD_GNU_TYPE = $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 DEB_HOST_GNU_TYPE  = $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
@@ -27,24 +27,22 @@ GCC_CONFIGURE_OPTS = \
 
 DESTDIR=$(CURDIR)/debian/ghdl
 
-# Debian-specific patches must be applied to the upstream GHDL source.
-# These patches are provided in debian/patches.
+# There are no Debian-specific patches at this time.
 patch: patch-stamp
 patch-stamp:
-	dh_testdir
-	QUILT_PATCHES=debian/patches quilt --quiltrc /dev/null push -a
+#	dh_testdir
+#	QUILT_PATCHES=debian/patches quilt --quiltrc /dev/null push -a
 	touch patch-stamp
 
 # The GHDL upstream snapshot is not yet prepared for compilation.
 # It contains a script ghdl/translate/gcc/dist.sh which is executed
 # here to build a source distribution archive.
-# This must be done AFTER Debian-specific patches have been applied.
 ghdl-$(GHDL_VERSION).tar.bz2: patch-stamp
 	dh_testdir
 	( cd ghdl/translate/gcc && \
           ./dist.sh sources && \
           mv ghdl-$(GHDL_VERSION).tar.bz2 ../../.. )
-	# touch the file to get a high resolution timestamp, otherwise it will be rebuilt without need
+	# touch the file to get a high resolution timestamp, otherwise it will be rebuilt unnecessarily
 	touch ghdl-$(GHDL_VERSION).tar.bz2
 
 # Compiling GHDL requires the sources of gcc-4.8.

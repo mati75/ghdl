@@ -1,8 +1,0 @@
-makefile-install-plugin.diff
-info-dircategory.diff
-fix_dirname_crash_debianbug573885.diff
-gcc48.diff
-fix_gnabug19195.diff
-fix_gnabug18351.diff
-fix_errmsg_support3028.diff
-fix_errmsg_support3060.diff

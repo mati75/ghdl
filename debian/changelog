@@ -1,16 +1,10 @@
-ghdl (0.30~svn20130213-3.1) unstable; urgency=low
+ghdl (0.31~sf20131215-1) unstable; urgency=low
 
-  * Add patch fix_dirname_crash_debianbug573885.diff. (Closes: #573885)
-  * Add pending upstream patch gcc48.diff.
-  * Upgrade to gcc-4.8.
-  * Remove workaround for broken patch in gcc-4.7-source.
-  * Add pending upstream patch fix_gnabug19195.diff.
-  * Add pending upstream patch fix_gnabug18351.diff.
-  * Add pending upstream patch fix_errmsg_support3028.diff.
-  * Add pending upstream patch fix_errmsg_support3060.diff.
-  * Remove obsolete patch fix_vector_ice.diff.
+  * New upstream snapshot. (Closes: #573885)
+  * Upgrade to gcc-4.8-source.
+  * Build with gnat-4.8.
 
- -- Joris van Rantwijk <joris@jorisvr.nl>  Fri, 13 Dec 2013 20:09:00 +0100
+ -- Joris van Rantwijk <joris@jorisvr.nl>  Sun, 15 Dec 2013 14:40:00 +0100
 
 ghdl (0.30~svn20130213-3) unstable; urgency=low
 
