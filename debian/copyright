@@ -1,3 +1,7 @@
+
+The Debian GHDL package is based on source code downloaded from
+http://sourceforge.net/projects/ghdl-updates/
+
 -------------------------------------------------------------------------------
 GHDL Debian Package (includes GHDL, GCC, and Debian Packaging)
 
