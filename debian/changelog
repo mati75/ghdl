@@ -1,3 +1,9 @@
+ghdl (0.31-1) unstable; urgency=medium
+
+  * New upstream release. (Closes: #573721, #585748)
+
+ -- Joris van Rantwijk <joris@jorisvr.nl>  Mon, 13 Jan 2014 21:32:00 +0100
+
 ghdl (0.31~sf20131215-1) unstable; urgency=low
 
   * New upstream snapshot. (closes: #573885, #584476)

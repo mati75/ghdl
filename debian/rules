@@ -5,7 +5,7 @@
 GCC_SOURCE_DIR = /usr/src/gcc-4.8
 
 # Expect to build a GHDL source distribution named ghdl-$(GHDL_VERSION).
-GHDL_VERSION = 0.31dev
+GHDL_VERSION = 0.31
 
 DEB_BUILD_GNU_TYPE = $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 DEB_HOST_GNU_TYPE  = $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)

@@ -2,15 +2,15 @@ Source: ghdl
 Section: electronics
 Priority: optional
 Maintainer: Joris van Rantwijk <joris@jorisvr.nl>
-Build-Depends: debhelper (>= 7), gnat-4.8, patch, bzip2, texinfo, zlib1g-dev, libgmp-dev (>= 2:5.0), libmpfr-dev (>= 3.1), libmpc-dev (>= 0.8), gcc-4.8-source, lsb-release, autogen, quilt
+Build-Depends: debhelper (>= 7), gnat-4.8, patch, bzip2, texinfo, zlib1g-dev, libgmp-dev (>= 2:5.0), libmpfr-dev (>= 3.1), libmpc-dev (>= 1.0), gcc-4.8-source, lsb-release, autogen, quilt
 Build-Conflicts: ghdl
-Standards-Version: 3.9.4
+Homepage: https://sourceforge.net/projects/ghdl-updates/
+Standards-Version: 3.9.5
 
 Package: ghdl
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, zlib1g-dev
 Suggests: gtkwave
-Homepage: http://ghdl.free.fr
 Description: VHDL compiler/simulator using GCC technology
  (Description from the GHDL home page <http://ghdl.free.fr>):
  .
