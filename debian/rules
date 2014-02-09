@@ -89,9 +89,9 @@ install-stamp: build-stamp
 clean:
 	dh_testdir
 	dh_testroot
-	rm -rf gcc/build
-	rm -f gcc/src/gcc/vhdl/libraries/*.v87 gcc/src/gcc/vhdl/libraries/*.v93
-	dh_clean 
+	rm -rf gcc
+	rm translate/gcc/ghdl-$(GHDL_VERSION).tar.bz2
+	dh_clean
 
 # Build architecture-independent files here.
 binary-indep: build install
