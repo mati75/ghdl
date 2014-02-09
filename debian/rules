@@ -91,7 +91,6 @@ install-stamp: build-stamp
 	dh_testroot
 	dh_prep
 	$(MAKE) -C gcc/build install DESTDIR=$(DESTDIR)
-	#install -D debian/ghdl.wrapper $(DESTDIR)/usr/bin/ghdl
 	rm -r $(DESTDIR)/usr/lib/ghdl/include
 	rm -r $(DESTDIR)/usr/lib/ghdl/share/man
 	rm -r $(DESTDIR)/usr/lib/ghdl/share/info
