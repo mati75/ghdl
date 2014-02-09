@@ -28,15 +28,13 @@ GCC_CONFIGURE_OPTS = \
 DESTDIR=$(CURDIR)/debian/ghdl
 
 # The GHDL upstream snapshot is not yet prepared for compilation.
-# It contains a script ghdl/translate/gcc/dist.sh which is executed
+# It contains a script translate/gcc/dist.sh which is executed
 # here to build a source distribution archive.
-ghdl-$(GHDL_VERSION).tar.bz2:
+translate/gcc/ghdl-$(GHDL_VERSION).tar.bz2:
 	dh_testdir
-	( cd ghdl/translate/gcc && \
-          ./dist.sh sources && \
-          mv ghdl-$(GHDL_VERSION).tar.bz2 ../../.. )
+	( cd translate/gcc && ./dist.sh sources )
 	# touch the file to get a high resolution timestamp, otherwise it will be rebuilt unnecessarily
-	touch ghdl-$(GHDL_VERSION).tar.bz2
+	touch -c translate/gcc/ghdl-$(GHDL_VERSION).tar.bz2
 
 # Compiling GHDL requires the sources of gcc-4.8.
 # 
@@ -48,7 +46,7 @@ ghdl-$(GHDL_VERSION).tar.bz2:
 # a subdirectory in the GCC source tree "gcc/src/gcc/vhdl".
 #
 setup: setup-stamp
-setup-stamp: ghdl-$(GHDL_VERSION).tar.bz2
+setup-stamp: translate/gcc/ghdl-$(GHDL_VERSION).tar.bz2
 	dh_testdir
 	# extract GCC source
 	mkdir -p gcc
@@ -57,7 +55,7 @@ setup-stamp: ghdl-$(GHDL_VERSION).tar.bz2
 	# apply Debian patches to GCC
 	$(MAKE) -C gcc -f debian/rules patch
 	# extract GHDL source
-	( cd gcc/src/gcc && tar xjf ../../../ghdl-$(GHDL_VERSION).tar.bz2 --strip-components 1 ghdl-$(GHDL_VERSION)/vhdl )
+	( cd gcc/src/gcc && tar xjf ../../../translate/gcc/ghdl-$(GHDL_VERSION).tar.bz2 --strip-components 1 ghdl-$(GHDL_VERSION)/vhdl )
 	rm -rf gcc/build
 	touch setup-stamp
 

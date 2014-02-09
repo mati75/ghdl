@@ -18,8 +18,7 @@ Step 1: Generate GHDL source archive.
     is not yet prepared for compilation. It contains a script which must
     be executed to build a GHDL source archive.
 
-    $ ( cd ghdl/translate/gcc ; ./dist.sh sources )
-    $ mv ghdl/translate/gcc/ghdl-<version>.tar.bz2 .
+    $ ( cd translate/gcc ; ./dist.sh sources )
 
 
 Step 2: Copy GCC source.
@@ -39,7 +38,7 @@ Step 3: Unpack GCC source code and apply Debian patches.
 
 Step 4: Unpack locally generated GHDL source archive.
 
-    $ tar xjvf ghdl-<version>.tar.bz2
+    $ tar xjvf translate/gcc/ghdl-<version>.tar.bz2
     $ mv ghdl-<version>/vhdl gcc/src/gcc
 
 --
