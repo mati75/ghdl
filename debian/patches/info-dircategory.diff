@@ -1,9 +1,8 @@
-Add INFO-DIR-SECTION line to texinfo document to avoid lintian error.
+Description: Add INFO-DIR-SECTION line to texinfo document to avoid lintian error.
+Author: Joris van Rantwijk <joris@jorisvr.nl>
 
-Index: ghdl-0.30~svn20130213/ghdl/doc/ghdl.texi
-===================================================================
---- ghdl-0.30~svn20130213.orig/ghdl/doc/ghdl.texi	2010-01-28 07:08:48.000000000 +0100
-+++ ghdl-0.30~svn20130213/ghdl/doc/ghdl.texi	2013-12-08 16:25:36.614533000 +0100
+--- a/ghdl/doc/ghdl.texi
++++ b/ghdl/doc/ghdl.texi
 @@ -4,6 +4,7 @@
  @settitle GHDL guide
  @c %**end of header
