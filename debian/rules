@@ -90,7 +90,7 @@ clean:
 	dh_testdir
 	dh_testroot
 	rm -rf gcc
-	rm translate/gcc/ghdl-$(GHDL_VERSION).tar.bz2
+	rm -f translate/gcc/ghdl-$(GHDL_VERSION).tar.bz2
 	dh_clean
 
 # Build architecture-independent files here.
