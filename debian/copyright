@@ -6,12 +6,6 @@ Upstream-Contact: ghdl-discuss@gna.org
 Files: *
 Copyright: 2002-2014 Tristan Gingold & GHDL Contributors
 License: GPL-2+
-Comment:
- Several standard VHDL headers say "all rights reserved". However,
- these standard headers are actually not copyrightable because they
- merely define an interface, and do NOT fall under any category of
- copyrightable works as defined by U.S. Code Title 17 §102(a), and in
- fact are specifically excluded by §102(b).
 
 Files: doc/ghdl.texi doc/ghdl.html
 Copyright: 2002-2014 Tristan Gingold
