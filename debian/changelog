@@ -1,27 +1,13 @@
-ghdl (0.31-1) unstable; urgency=medium
+ghdl (0.31-2) unstable; urgency=low
 
-  * New upstream release. (Closes: #573721, #585748)
-
- -- Joris van Rantwijk <joris@jorisvr.nl>  Mon, 13 Jan 2014 22:02:00 +0100
-
-ghdl (0.31~sf20131215-1) unstable; urgency=low
-
-  * New upstream snapshot. (closes: #573885, #584476)
-  * Upgrade to gcc-4.8-source.
-  * Build with gnat-4.8.
-
- -- Joris van Rantwijk <joris@jorisvr.nl>  Sun, 15 Dec 2013 22:07:00 +0100
-
-ghdl (0.30~svn20130213-3) unstable; urgency=low
-
-  * New maintainer. (Closes: #696548)
+  * New upstream release. (Closes: #573721, #585748, #573885, #584476)
+  * New Debian maintainer. (Closes: #696548)
   * Fix building of ghdl for Debian wheezy/jessie. (Closes: #695303)
-  * Upgrade to GHDL upstream SVN snapshot of 2013-02-13.
-  * Upgrade to gcc-4.7. (Closes: #392952)
-  * Workaround for broken patch in gcc-4.7-source.
+  * Upgrade to gcc-4.8-source. (Closes: #392952)
+  * Build with gnat-4.8.
   * Disable libquadmath to avoid lintian errors for libquadmath.la
 
- -- Joris van Rantwijk <joris@jorisvr.nl>  Sun, 27 Oct 2013 18:31:25 +0100
+ -- Joris van Rantwijk <joris@jorisvr.nl>  Thu, 27 Feb 2014 21:57:00 +0100
 
 ghdl (0.29+gcc4.3.4+dfsg-1.1) unstable; urgency=low
 
