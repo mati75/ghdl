@@ -63,7 +63,7 @@ configure: configure-stamp
 configure-stamp: setup-stamp
 	dh_testdir
 	mkdir -p gcc/build
-	(cd gcc/build && ../src/configure $(GCC_CONFIGURE_OPTS))
+	(cd gcc/build && CC=gnatgcc ../src/configure $(GCC_CONFIGURE_OPTS))
 	touch configure-stamp
 
 build: build-arch build-indep
