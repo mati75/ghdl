@@ -3,7 +3,7 @@ ghdl (0.31-2wheezy1) unstable; urgency=low
   * Backport to Debian wheezy.
   * Depend on gnat instead of gnat-4.8.
 
- -- Joris van Rantwijk <joris@jorisvr.nl>  Sat, 01 Mar 2014 13:00:00 +0100
+ -- Joris van Rantwijk <joris@jorisvr.nl>  Sat, 01 Mar 2014 15:32:00 +0100
 
 ghdl (0.31-2) unstable; urgency=low
 
