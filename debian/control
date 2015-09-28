@@ -1,5 +1,5 @@
 Source: ghdl
-Section: electronics
+Section: non-free/electronics
 Priority: optional
 Maintainer: Joris van Rantwijk <joris@jorisvr.nl>
 Build-Depends: dpkg-dev (>= 1.16.1), debhelper (>= 7), gnat-4.9, patchutils, bzip2, texinfo, zlib1g-dev, libgmp-dev (>= 2:5.0), libmpfr-dev (>= 3.1), libmpc-dev (>= 1.0), gcc-4.8-source, lsb-release, autogen
