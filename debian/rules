@@ -1,69 +1,12 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 
-# Directory where we will look for an installed gcc-4.8-source package.
-GCC_SOURCE_DIR = /usr/src/gcc-4.8
-
-# Expect to build a GHDL source distribution named ghdl-$(GHDL_VERSION).
-GHDL_VERSION = 0.32dev
-
-# Setup DEB_*_GNU_TYPE and similar variables.
-include /usr/share/dpkg/default.mk
-
-# Note: --enable-targets=all is required to avoid problems with multiarch.
-GCC_CONFIGURE_OPTS = \
-  --build=$(DEB_BUILD_GNU_TYPE) \
-  --host=$(DEB_HOST_GNU_TYPE) \
-  --prefix=/usr/lib/ghdl \
-  --with-system-zlib \
-  --enable-languages=vhdl \
-  --enable-bootstrap=no \
-  --disable-shared \
-  --disable-libmudflap \
-  --enable-targets=all \
-  --disable-libquadmath \
-  --disable-libssp \
-  --disable-libgomp
-
 DESTDIR=$(CURDIR)/debian/ghdl
 
-# The GHDL upstream snapshot is not yet prepared for compilation.
-# It contains a script translate/gcc/dist.sh which is executed
-# here to build a source distribution archive.
-translate/gcc/ghdl-$(GHDL_VERSION).tar.bz2:
-	dh_testdir
-	( cd translate/gcc && ./dist.sh sources )
-	# touch the file to get a high resolution timestamp, otherwise it will be rebuilt unnecessarily
-	touch -c translate/gcc/ghdl-$(GHDL_VERSION).tar.bz2
-
-# Compiling GHDL requires the sources of gcc-4.8.
-# 
-# The Debian package gcc-4.8-source is used to provide the GCC sources.
-# The GCC source tree is extracted into a new subdirectory "gcc" in the
-# unpacked source package.  All Debian patches for GCC are then applied.
-#
-# Finally, the newly created GHDL source distribution is extracted as
-# a subdirectory in the GCC source tree "gcc/src/gcc/vhdl".
-#
-setup: setup-stamp
-setup-stamp: translate/gcc/ghdl-$(GHDL_VERSION).tar.bz2
-	dh_testdir
-	# extract GCC source
-	mkdir -p gcc
-	ln -sf $(GCC_SOURCE_DIR)/gcc*.tar* gcc
-	cp -a $(GCC_SOURCE_DIR)/debian gcc
-	# apply Debian patches to GCC
-	$(MAKE) -C gcc -f debian/rules patch
-	# extract GHDL source
-	( cd gcc/src/gcc && tar xjf ../../../translate/gcc/ghdl-$(GHDL_VERSION).tar.bz2 --strip-components 1 ghdl-$(GHDL_VERSION)/vhdl )
-	rm -rf gcc/build
-	touch setup-stamp
-
 configure: configure-stamp
-configure-stamp: setup-stamp
+configure-stamp:
 	dh_testdir
-	mkdir -p gcc/build
-	(cd gcc/build && ../src/configure $(GCC_CONFIGURE_OPTS))
+	./configure --with-llvm=/usr/lib/llvm-3.5 --prefix=/usr
 	touch configure-stamp
 
 build: build-arch build-indep
@@ -71,7 +14,8 @@ build-arch: build-stamp
 build-indep: build-stamp
 build-stamp: configure-stamp
 	dh_testdir
-	$(MAKE) -C gcc/build CFLAGS="-O"
+	$(MAKE)
+	makeinfo doc/ghdl.texi
 	touch build-stamp
 
 install: install-stamp
@@ -79,11 +23,7 @@ install-stamp: build-stamp
 	dh_testdir
 	dh_testroot
 	dh_prep
-	$(MAKE) -C gcc/build install DESTDIR=$(DESTDIR)
-	rm -r $(DESTDIR)/usr/lib/ghdl/include
-	rm -r $(DESTDIR)/usr/lib/ghdl/share/man
-	rm -r $(DESTDIR)/usr/lib/ghdl/share/info
-	find $(DESTDIR)/usr/lib/ghdl -type f -name '*.la' -delete
+	$(MAKE) install DESTDIR=$(DESTDIR)
 	touch install-stamp
 
 clean:
@@ -117,5 +57,5 @@ binary-arch: build install
 	dh_builddeb
 
 binary: binary-indep binary-arch
-.PHONY: setup configure build install clean binary-indep binary-arch binary
+.PHONY: configure build install clean binary-indep binary-arch binary
 

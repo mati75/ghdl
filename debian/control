@@ -2,7 +2,7 @@ Source: ghdl
 Section: non-free/electronics
 Priority: optional
 Maintainer: Joris van Rantwijk <joris@jorisvr.nl>
-Build-Depends: dpkg-dev (>= 1.16.1), debhelper (>= 7), gnat-4.9, patchutils, bzip2, texinfo, zlib1g-dev, libgmp-dev (>= 2:5.0), libmpfr-dev (>= 3.1), libmpc-dev (>= 1.0), gcc-4.8-source, lsb-release, autogen
+Build-Depends: debhelper (>= 7), gnat, llvm-3.5-dev, texinfo
 Build-Conflicts: ghdl
 Homepage: https://sourceforge.net/projects/ghdl-updates/
 Vcs-Git: https://github.com/jorisvr/ghdl_debian
@@ -10,19 +10,23 @@ Standards-Version: 3.9.5
 
 Package: ghdl
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, zlib1g-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Suggests: gtkwave
-Description: VHDL compiler/simulator using GCC technology
- (Description from the GHDL home page <http://ghdl.free.fr>):
- .
- GHDL is a VHDL simulator, using the GCC technology.
+Description: VHDL compiler/simulator
+ GHDL is an open-source simulator for the VHDL language.
  .
  VHDL is a language standardized by the IEEE, intended for developing
- electronic systems.
+ electronic systems. GHDL implements the VHDL language according to the
+ IEEE 1076-1987 or the IEEE 1076-1993 standard.
  .
- GHDL implements the VHDL language according to the IEEE 1076-1987 or
- the IEEE 1076-1993 standard. GHDL compiles VHDL files and creates a
- binary which simulates (or executes) your design.
+ GHDL compiles VHDL files into executable code. The resulting program,
+ when executed, simulates the electronic design. GHDL is not a synthesizer:
+ it does not translate VHDL into a netlist.
  .
- GHDL does not do synthesis: it cannot translate your design into a
- netlist.
+ GHDL and its compiled programs are command-line tools. The simulations can
+ optionally write VCD files which may be opened in an external waveform viewer
+ such as gtkwave. Combined with a waveform viewer and a text editor, GHDL is
+ a very powerful tool for writing, testing and simulating your VHDL code. 
+ .
+ GHDL supports several code generation backends; this package is built with
+ the LLVM backend.

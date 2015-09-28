@@ -1,14 +1,12 @@
-ghdl (0.32~sf20141031-1) unstable; urgency=low
+ghdl (0.33~sf20150928-1) unstable; urgency=low
 
   * Unofficial Debian package.
   * New upstream release. (Closes: #573721, #585748, #573885, #584476)
   * Fix building of ghdl for Debian jessie. (Closes: #695303)
-  * Upgrade to gcc-4.8-source. (Closes: #392952)
+  * Switch to LLVM backend instead of GCC. (Closes: #392952)
   * Build with gnat-4.9.
-  * Disable libquadmath to avoid lintian errors for libquadmath.la
-  * Fix internal compiler error on mips.
 
- -- Joris van Rantwijk <joris@jorisvr.nl>  Fri, 31 Oct 2014 00:05:00 +0100
+ -- Joris van Rantwijk <joris@jorisvr.nl>  Mon, 28 Sep 2015 22:51:04 +0200
 
 ghdl (0.29+gcc4.3.4+dfsg-1.1) unstable; urgency=low
 
