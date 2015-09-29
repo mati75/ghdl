@@ -28,5 +28,5 @@ Description: VHDL compiler/simulator
  such as gtkwave. Combined with a waveform viewer and a text editor, GHDL is
  a very powerful tool for writing, testing and simulating your VHDL code. 
  .
- GHDL supports several code generation backends; this package is built with
- the LLVM backend.
+ GHDL supports several code generation backends; this package uses the LLVM
+ backend.

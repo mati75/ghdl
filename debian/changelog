@@ -4,9 +4,8 @@ ghdl (0.33~sf20150928-1) unstable; urgency=low
   * New upstream release. (Closes: #573721, #585748, #573885, #584476)
   * Fix building of ghdl for Debian jessie. (Closes: #695303)
   * Switch to LLVM backend instead of GCC. (Closes: #392952)
-  * Build with gnat-4.9.
 
- -- Joris van Rantwijk <joris@jorisvr.nl>  Mon, 28 Sep 2015 22:51:04 +0200
+ -- Joris van Rantwijk <joris@jorisvr.nl>  Tue, 29 Sep 2015 12:18:20 +0200
 
 ghdl (0.29+gcc4.3.4+dfsg-1.1) unstable; urgency=low
 
