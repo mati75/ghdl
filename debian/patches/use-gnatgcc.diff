@@ -1,0 +1,16 @@
+Use "gnat" and "gnatgcc" instead of "gcc" to avoid problems when gnat
+and gcc refer to different GCC releases (i.e. gnat-4.9 with gcc-5).
+
+--- a/src/grt/Makefile
++++ b/src/grt/Makefile
+@@ -18,8 +18,8 @@
+ GRT_FLAGS=-g -O
+ GRT_ADAFLAGS=-gnatn
+ 
+-ADAC=gcc
+-CC=gcc
++ADAC=gnat
++CC=gnatgcc
+ GNATFLAGS=$(CFLAGS) -gnatf -gnaty3befhkmr -gnatwlu
+ GHDL1=../ghdl1-gcc
+ GRTSRCDIR=.

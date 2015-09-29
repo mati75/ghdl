@@ -6,7 +6,7 @@ DESTDIR=$(CURDIR)/debian/ghdl
 configure: configure-stamp
 configure-stamp:
 	dh_testdir
-	./configure --with-llvm=/usr/lib/llvm-3.5 --prefix=/usr
+	CC=gnatgcc ./configure --with-llvm=/usr/lib/llvm-3.5 --prefix=/usr
 	touch configure-stamp
 
 build: build-arch build-indep
