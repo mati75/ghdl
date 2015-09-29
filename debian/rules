@@ -29,8 +29,8 @@ install-stamp: build-stamp
 clean:
 	dh_testdir
 	dh_testroot
-	rm -rf gcc
-	rm -f translate/gcc/ghdl-$(GHDL_VERSION).tar.bz2
+	if [ -f Makefile ]; then $(MAKE) distclean ; fi
+	$(RM) ghdl.info
 	dh_clean
 
 # Build architecture-independent files here.
