@@ -16,8 +16,8 @@ Description: VHDL compiler/simulator
  GHDL is an open-source simulator for the VHDL language.
  .
  VHDL is a language standardized by the IEEE, intended for developing
- electronic systems. GHDL implements the VHDL language according to the
- IEEE 1076-1987 or the IEEE 1076-1993 standard.
+ electronic systems. GHDL fully supports IEEE 1076-1987, IEEE 1076-1993,
+ IEEE 1076-2002 and partially supports the 1076-2008 version of VHDL.
  .
  GHDL compiles VHDL files into executable code. The resulting program,
  when executed, simulates the electronic design. GHDL is not a synthesizer:
