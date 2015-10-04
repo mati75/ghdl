@@ -2,7 +2,7 @@ Source: ghdl
 Section: non-free/electronics
 Priority: optional
 Maintainer: Joris van Rantwijk <joris@jorisvr.nl>
-Build-Depends: debhelper (>= 7), gnat, llvm-3.5-dev, clang, zlib1g-dev, libedit-dev, texinfo
+Build-Depends: debhelper (>= 7), gnat-4.8, llvm-3.5-dev, clang-3.5, zlib1g-dev, libedit-dev, texinfo
 Build-Conflicts: ghdl
 Homepage: https://sourceforge.net/projects/ghdl-updates/
 Vcs-Git: https://github.com/jorisvr/ghdl_debian

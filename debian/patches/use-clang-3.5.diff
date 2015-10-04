@@ -1,0 +1,12 @@
+Build with clang++-3.5 on Ubuntu 14.04 (default clang++ is 3.4).
+
+--- ghdl-0.33.orig/src/ortho/llvm/Makefile
++++ ghdl-0.33/src/ortho/llvm/Makefile
+@@ -1,6 +1,6 @@
+ ortho_srcdir=..
+ GNAT_FLAGS=-gnaty3befhkmr -gnata -gnatf -gnatwael -gnat05
+-CXX=clang++
++CXX=clang++-3.5
+ LLVM_CONFIG=llvm-config
+ SED=sed
+ BE=llvm
