@@ -1,0 +1,253 @@
+ghdl (0.33-1) unstable; urgency=low
+
+  [ Joris van Rantwijk ]
+  * Unofficial Debian package.
+  * New upstream release. (Closes: #573721, #585748, #573885, #584476)
+  * Fix building of ghdl for Debian jessie. (Closes: #695303)
+  * Switch to LLVM backend instead of GCC. (Closes: #392952)
+
+ -- Joris van Rantwijk <joris@jorisvr.nl>  Sun, 04 Oct 2015 11:08:00 +0200
+
+ghdl (0.29+gcc4.3.4+dfsg-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Fix FTBFS on multiarch systems. (Closes: #635923)
+  * Don't build the package twice.
+  * Whole changes have been merged from Ubuntu.
+
+ -- Artur Rona <ari-tczew@tlen.pl>  Sat, 05 May 2012 23:04:42 +0200
+
+ghdl (0.29+gcc4.3.4+dfsg-1) unstable; urgency=low
+
+  * New upstream release (closes: #548004)
+  * Updated to policy 3.8.3
+  * Now using gcc-4.3.4
+  * Now building with gnat-4.4
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Sun, 24 Jan 2010 16:09:58 -0700
+
+ghdl (0.27+svn110+gcc4.3.3+dfsg-1) unstable; urgency=low
+
+  * Now using gcc-4.3.3
+  * Updated copyright information
+  * Added Vcs-Git information
+  * Updated to policy 3.8.1 
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Thu, 02 Apr 2009 21:23:07 -0600
+
+ghdl (0.27+svn110+gcc4.3.2~dfsg-3) unstable; urgency=low
+
+  * Ensure that gnatbind uses the correct CC, not cc
+  * Added Vcs-Bzr information
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Wed, 05 Nov 2008 16:13:37 -0700
+
+ghdl (0.27+svn110+gcc4.3.2~dfsg-2) unstable; urgency=low
+
+  * Moving to unstable.
+  * Updated to policy 3.8.0
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Sun, 02 Nov 2008 19:45:31 -0700
+
+ghdl (0.27+svn110+gcc4.3.2~dfsg-1) experimental; urgency=low
+
+  * New upstream release (0.27)
+  * Upstream patched to svn110
+  * Now using gcc-4.3.2
+  * Added newly necessary libgmp3-dev and libmpfr-dev to build-depends.
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Sun, 02 Nov 2008 16:41:28 -0700
+
+ghdl (0.26+svn98+gcc4.1.2~dfsg-1) unstable; urgency=low
+
+  * Upstream patched to svn98
+  * Fix lintian warnings about harmless empty directories.
+  * Fix dependency; seems like gnat-4.3 is needed after all.
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Mon, 02 Jun 2008 17:01:11 -0600
+
+ghdl (0.26+svn94+gcc4.1.2~dfsg-2) unstable; urgency=low
+
+  * Force *FLAGS environment passed to make to override the messed up
+    dpkg-buildpackage environment that causes compile failures.
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Sat, 17 May 2008 12:51:39 -0600
+
+ghdl (0.26+svn94+gcc4.1.2~dfsg-1) unstable; urgency=low
+
+  * Upstream patched to svn94
+  * Reworked package build quite a bit; special thanks to Fedora maintainer
+    Thomas Sailer <t.sailer@alumni.ethz.ch> for some ideas
+  * Finally building with gnat-4.3 (closes: #478032)
+  * Revamped package structure and build system
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Sat, 17 May 2008 11:14:19 -0600
+
+ghdl (0.26+gcc4.1.2~dfsg-4) unstable; urgency=low
+
+  * Fix hosed package generation.
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Thu, 15 May 2008 18:36:42 -0600
+
+ghdl (0.26+gcc4.1.2~dfsg-3) unstable; urgency=low
+
+  * Reverting back to gnat-4.1, because gnat-4.2 is being removed and
+    gnat-4.3 doesn't yet work for building (closes: #478032)
+  * Dropped ivi suggestion, as it is obsolete and not in Debian anymore 
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Thu, 15 May 2008 17:39:18 -0600
+
+ghdl (0.26+gcc4.1.2~dfsg-2) unstable; urgency=low
+
+  * Now building with gnat-4.2.
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Sun, 12 Aug 2007 10:02:56 -0600
+
+ghdl (0.26+gcc4.1.2~dfsg-1) unstable; urgency=low
+
+  * New upstream release (closes: #413088)
+  * Using DFSGized gcc4.1.2 tarball (closes: #392949)
+  * Specifically note copyright status of standard headers (closes: #403621)
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Thu, 12 Apr 2007 18:43:56 -0600
+
+ghdl (0.25+gcc4.1.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Now using dpatch
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Mon, 14 Aug 2006 09:35:06 -0600
+
+ghdl (0.24+gcc4.1.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Removed ortho-lang amd64 patch (integrated upstream)
+  * Upstream now includes its own manpage; use that instead
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Sat,  8 Jul 2006 08:45:09 -0600
+
+ghdl (0.23+gcc4.1.1-1) unstable; urgency=medium
+
+  * New upstream release, plus patch from author (closes: #360382)
+  * Using gcc-core-4.1.1
+  * Building with gnat-4.1
+  * Moved to Standards-Version 3.7.2; no changes required
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Tue, 13 Jun 2006 17:12:56 -0600
+
+ghdl (0.22-1) unstable; urgency=low
+
+  * New upstream release
+  * Fixed typo in manpage (closes: #350162)
+    * Thanks to Nicolas François <nicolas.francois@centraliens.net>
+  * Added texinfo and zlib1g-dev to build-depends.
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Sat,  1 Apr 2006 09:20:06 -0700
+
+ghdl (0.21-1) unstable; urgency=low
+
+  * The "it-finally-works-on-my-amd64-computer-woohoo!" release.
+  * New upstream release (closes: #338427)
+  * Disable multilib and mudflap (closes: #276399)
+  * Added dependency on zlib1g-dev (closes: #341330)
+  * Fixed up debian/rules to use stamp files more cleanly
+  * Removed some now-unnecessary patches, applied upstream
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Sat, 31 Dec 2005 09:39:10 -0700
+
+ghdl (0.20-1) unstable; urgency=low
+
+  * New upstream release
+  * Using gcc-core-4.0.2
+  * Removed runtime GNAT dependency (closes: #315569, #305045)
+  * Added debian/watch
+  * Removed some now unnecessary lintian-overrides
+  * Updated FSF address to appease the lintian gods
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Wed,  9 Nov 2005 09:46:36 -0700
+
+ghdl (0.18-2) unstable; urgency=medium
+
+  * Add dependancy on gnat-3.4 (closes: #301875)
+  * Urgency medium as this prevents elaboration from working.
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Mon, 28 Mar 2005 17:42:00 -0700
+
+ghdl (0.18-1) unstable; urgency=low
+
+  * New upstream release
+  * Using gcc-core-3.4-20050311
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Thu, 17 Mar 2005 10:50:18 -0700
+
+ghdl (0.17-3) unstable; urgency=low
+
+  * Added explicit license statement in manpage.
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Thu, 17 Mar 2005 10:08:18 -0700
+
+ghdl (0.17-2) unstable; urgency=low
+
+  * Added dependency on flex and bison
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Sat,  5 Mar 2005 08:09:44 -0700
+
+ghdl (0.17-1) unstable; urgency=low
+
+  * New upstream release
+  * Using gcc-core-3.4-20050128
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Fri,  4 Mar 2005 09:14:01 -0700
+
+ghdl (0.16-1) unstable; urgency=low
+
+  * New upstream release
+  * No longer need fix_cf_files.sh (fixed upstream)
+  * Standards version bumped to 3.6.1.1
+  * Added lintian override to let me say "VHDL" in description synopsys
+	
+ -- Wesley J. Landaker <wjl@icecavern.net>  Fri, 21 Jan 2005 11:45:01 -0700
+
+ghdl (0.14-2) unstable; urgency=low
+
+  * Moving build to gnat-3.4
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Thu,  9 Sep 2004 10:43:54 -0600
+
+ghdl (0.14-1) unstable; urgency=low
+
+  * New upstream release
+  * Removed build dependency on sed and findutils (essential packages)
+  * Removed DESTDIR and MAX_BITS_PER_WORD patches (applied upstream)
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Sun, 29 Aug 2004 11:52:50 -0600
+
+ghdl (0.13-4) unstable; urgency=low
+
+  * Add overrides for harmless lintian warnings
+  * Fixed bad paths getting into .cf files (closes: #268149)
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Thu, 26 Aug 2004 09:34:46 -0600
+
+ghdl (0.13-3) unstable; urgency=low
+
+  * Added patch for MAX_BITS_PER_WORD support on ia64 and alpha.
+    (Closes: #266792)
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Thu, 19 Aug 2004 07:27:14 -0600
+
+ghdl (0.13-2) unstable; urgency=low
+
+  * Only known to work on i386, but changed architecture to 'any' so the
+    buildd's will try.
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Mon, 16 Aug 2004 20:05:02 -0600
+
+ghdl (0.13-1) unstable; urgency=low
+
+  * Initial Release (closes: #170583)
+  * Using GCC 3.4.1 sources
+  * Patched GHDL to support DESTDIR
+
+ -- Wesley J. Landaker <wjl@icecavern.net>  Sat, 31 Jul 2004 20:04:56 -0600
+
