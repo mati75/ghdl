@@ -1,10 +1,14 @@
-ghdl (0.33-1) unstable; urgency=low
+ghdl (0.33-1) UNRELEASED; urgency=low
 
   [ Joris van Rantwijk ]
   * Unofficial Debian package.
   * New upstream release. (Closes: #573721, #585748, #573885, #584476)
   * Fix building of ghdl for Debian jessie. (Closes: #695303)
   * Switch to LLVM backend instead of GCC. (Closes: #392952)
+  * 
+
+  [ Mateusz Łukasik ]
+  * Bump Standards Version to 3.9.6.
 
  -- Joris van Rantwijk <joris@jorisvr.nl>  Sun, 04 Oct 2015 11:08:00 +0200
 

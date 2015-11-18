@@ -1,0 +1,32 @@
+Source: ghdl
+Section: non-free/electronics
+Priority: optional
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Build-Depends: debhelper (>= 9), gnat, llvm-3.6-dev, clang, zlib1g-dev, libedit-dev, texinfo
+Build-Conflicts: ghdl
+Homepage: https://sourceforge.net/projects/ghdl-updates/
+Vcs-Git: https://github.com/jorisvr/ghdl_debian
+Standards-Version: 3.9.6
+
+Package: ghdl
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: gtkwave
+Description: VHDL compiler/simulator
+ GHDL is an open-source simulator for the VHDL language.
+ .
+ VHDL is a language standardized by the IEEE, intended for developing
+ electronic systems. GHDL fully supports IEEE 1076-1987, IEEE 1076-1993,
+ IEEE 1076-2002 and partially supports the 1076-2008 version of VHDL.
+ .
+ GHDL compiles VHDL files into executable code. The resulting program,
+ when executed, simulates the electronic design. GHDL is not a synthesizer:
+ it does not translate VHDL into a netlist.
+ .
+ GHDL and its compiled programs are command-line tools. The simulations can
+ optionally write VCD files which may be opened in an external waveform viewer
+ such as gtkwave. Combined with a waveform viewer and a text editor, GHDL is
+ a very powerful tool for writing, testing and simulating your VHDL code. 
+ .
+ GHDL supports several code generation backends; this package uses the LLVM
+ backend.
