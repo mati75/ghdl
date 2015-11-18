@@ -1,61 +1,10 @@
 #!/usr/bin/make -f
-# -*- makefile -*-
 
-DESTDIR=$(CURDIR)/debian/ghdl
+%:
+	dh $@
 
-configure: configure-stamp
-configure-stamp:
-	dh_testdir
-	CC=gnatgcc ./configure --with-llvm=/usr/lib/llvm-3.5 --prefix=/usr
-	touch configure-stamp
+override_dh_auto_configure:
+	CC=gnatgcc ./configure --prefix=/usr --with-llvm=/usr/lib/llvm-3.5
 
-build: build-arch build-indep
-build-arch: build-stamp
-build-indep: build-stamp
-build-stamp: configure-stamp
-	dh_testdir
-	$(MAKE)
-	makeinfo doc/ghdl.texi
-	touch build-stamp
-
-install: install-stamp
-install-stamp: build-stamp
-	dh_testdir
-	dh_testroot
-	dh_prep
-	$(MAKE) install DESTDIR=$(DESTDIR)
-	touch install-stamp
-
-clean:
-	dh_testdir
-	dh_testroot
-	if [ -f Makefile ]; then $(MAKE) distclean ; fi
-	$(RM) ghdl.info
-	dh_clean
-
-# Build architecture-independent files here.
-binary-indep: build install
-# We have nothing to do by default.
-
-# Build architecture-dependent files here.
-binary-arch: build install
-	dh_testdir
-	dh_testroot
-	dh_installchangelogs 
-	dh_installdocs
-	dh_installman
-	dh_installinfo
-	dh_lintian
-	dh_link
-	dh_strip
-	dh_compress
-	dh_fixperms
-	dh_installdeb
-	dh_shlibdeps
-	dh_gencontrol
-	dh_md5sums
-	dh_builddeb
-
-binary: binary-indep binary-arch
-.PHONY: configure build install clean binary-indep binary-arch binary
-
+override_dh_auto_test:
+	#disable test

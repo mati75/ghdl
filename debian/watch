@@ -1,0 +1,4 @@
+version=3
+opts=dversionmangle=s/-\d\+dfsg// \
+
+http://sf.net/ghdl-updates/ghdl-(.+)\.(?:zip|tgz|tbz|txz|(?:tar\.(?:gz|bz2|xz)))
