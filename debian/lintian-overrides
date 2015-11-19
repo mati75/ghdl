@@ -1,1 +1,4 @@
 ghdl: description-synopsis-starts-with-a-capital-letter
+ghdl: spelling-error-in-binary usr/bin/ghdl nam name
+ghdl: spelling-error-in-binary usr/bin/ghdl ment meant
+ghdl: spelling-error-in-binary usr/bin/ghdl1-llvm nam name
