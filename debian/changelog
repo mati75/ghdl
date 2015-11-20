@@ -13,6 +13,7 @@ ghdl (0.33-1) UNRELEASED; urgency=low
   * Add debian/watch.
   * Update lintian-overrides for spelling errors.
   * Install NEWS as upstream changelog.
+  * Add manpages for ghdl1-llvm.
 
  -- Joris van Rantwijk <joris@jorisvr.nl>  Sun, 04 Oct 2015 11:08:00 +0200
 
