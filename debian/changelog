@@ -10,10 +10,11 @@ ghdl (0.33-1) UNRELEASED; urgency=low
 
   [ Mateusz Łukasik ]
   * Bump Standards Version to 3.9.6.
-  * Add debian/watch.
+  * Update debian/watch for new homepage.
   * Update lintian-overrides for spelling errors.
   * Install NEWS as upstream changelog.
   * Add manpages for ghdl1-llvm.
+  * Update VCS fields.
 
  -- Joris van Rantwijk <joris@jorisvr.nl>  Sun, 04 Oct 2015 11:08:00 +0200
 
